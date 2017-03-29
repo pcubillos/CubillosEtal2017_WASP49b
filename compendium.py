@@ -38,11 +38,11 @@ cd $topdir/run01/
 $topdir/pyratbay/pbay.py -c opacity_H2O.cfg
 
 
-# Run MCMC for solar abundance model
+# Run MCMC for solar abundance model:
 cd $topdir/run02/
-$topdir/pyratbay/pbay.py -c mcmc_1xsolar.cfg
-$topdir/pyratbay/pbay.py -c mcmc_100xsolar.cfg
-$topdir/pyratbay/pbay.py -c mcmc_0.1xsolar.cfg
+$topdir/pyratbay/pbay.py -c mcmc_000.1xsolar.cfg
+$topdir/pyratbay/pbay.py -c mcmc_001.0xsolar.cfg
+$topdir/pyratbay/pbay.py -c mcmc_100.0xsolar.cfg
 """
 
 import sys, os
