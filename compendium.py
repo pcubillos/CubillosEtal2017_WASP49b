@@ -33,12 +33,16 @@ $topdir/pyratbay/pbay.py -c atm_001.00xsolar.cfg
 $topdir/pyratbay/pbay.py -c atm_100.00xsolar.cfg
 
 
-Make atmospheric files
-----------------------
+# Make H2O opacity file:
 cd $topdir/run01/
-$topdir/pyratbay/pbay.py -c atm_wasp63b.cfg
-$topdir/pyratbay/pbay.py -c atm_wasp63b_cold.cfg
-$topdir/pyratbay/pbay.py -c atm_wasp63b_300Xsolar.cfg
+$topdir/pyratbay/pbay.py -c opacity_H2O.cfg
+
+
+# Run MCMC for solar abundance model
+cd $topdir/run02/
+$topdir/pyratbay/pbay.py -c mcmc_1xsolar.cfg
+$topdir/pyratbay/pbay.py -c mcmc_100xsolar.cfg
+$topdir/pyratbay/pbay.py -c mcmc_0.1xsolar.cfg
 """
 
 import sys, os
