@@ -5,7 +5,7 @@ From the directory where this file is located, execute:
 topdir=`pwd`
 git clone --recursive https://github.com/pcubillos/pyratbay
 cd $topdir/pyratbay
-git checkout 1d23a10
+git checkout 0b47988
 make
 
 
@@ -43,6 +43,14 @@ cd $topdir/run02/
 $topdir/pyratbay/pbay.py -c mcmc_000.1xsolar.cfg
 $topdir/pyratbay/pbay.py -c mcmc_001.0xsolar.cfg
 $topdir/pyratbay/pbay.py -c mcmc_100.0xsolar.cfg
+
+
+# Figure 3:
+cd $topdir/run01/
+$topdir/fig3.py
+
+# Figure 4:
+
 """
 
 import sys, os
