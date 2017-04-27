@@ -1,7 +1,5 @@
-"""
-Clone code
-----------
-From the directory where this file is located, execute:
+# Clone code
+# From the directory where this file is located, execute:
 topdir=`pwd`
 git clone --recursive https://github.com/pcubillos/pyratbay
 cd $topdir/pyratbay
@@ -44,14 +42,16 @@ $topdir/pyratbay/pbay.py -c mcmc_000.1xsolar.cfg
 $topdir/pyratbay/pbay.py -c mcmc_001.0xsolar.cfg
 $topdir/pyratbay/pbay.py -c mcmc_100.0xsolar.cfg
 
+# Figure 1:
+cd $topdir
+$topdir/fig_FORS2.py
 
-# Figure 3:
+# Figure 4:
 cd $topdir/run01/
-$topdir/fig3.py
+$topdir/fig_clearspectra.py
 
-# Figures 4 and 5:
+# Figures 5 and 6:
 cd $topdir/run02/
-$topdir/fig4_5.py
+$topdir/fig_retrieval.py
 
-"""
 

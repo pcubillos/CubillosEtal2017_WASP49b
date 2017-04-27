@@ -63,8 +63,8 @@ atmfile = ["../run01/WASP-49b_100.0xsolar.atm",
            "../run01/WASP-49b_001.0xsolar.atm",
            "../run01/WASP-49b_000.1xsolar.atm"]
 
-postfiles = ["./MCMC_WASP-49b_000.1xsolar_Tprior.npz",
-             "./MCMC_WASP-49b_000.1xsolar_Tprior.npz",
+postfiles = ["./MCMC_WASP-49b_100.0xsolar_Tprior.npz",
+             "./MCMC_WASP-49b_001.0xsolar_Tprior.npz",
              "./MCMC_WASP-49b_000.1xsolar_Tprior.npz"]
 
 name = ["100.0xsolar", "001.0xsolar", "000.1xsolar"]
@@ -138,7 +138,7 @@ label = [r"$100\times\,{\rm solar}$",
          r"$0.1\times\,{\rm solar}$"]
 
 # Figure 5:
-h.histogram(Zp, Zr, parname=pname, percentile=[0.9545, 0.683], xran=xran,
-   label=label, savefile="../plots/marginal-vs-metallicity.ps")
+boundaries = h.histogram(Zp, Zr, parname=pname, percentile=[0.9545, 0.683],
+            xran=xran, label=label, savefile="../plots/marginal_posteriors.ps")
 
 

@@ -6,8 +6,8 @@ import scipy.interpolate as si
 
 here = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(here + '/pyratbay/modules/MCcubed')
-import MCcubed as mc3
-mu = mc3.utils
+import MCcubed.utils as mu
+
 
 def histogram(Z1, Z2=None, Z3=None, label=None, parname=None, thinning=1,
                savefile=None, percentile=[], xran=None):
@@ -30,8 +30,11 @@ def histogram(Z1, Z2=None, Z3=None, label=None, parname=None, thinning=1,
     xpdf = [xpdf]
   # Histogram keywords depending whether one wants the HPD or not:
   hkw = {}
+  nper = 0
   if percentile is not None:
     hkw = {'histtype':'step', 'lw':2, 'color':'b'}
+    nper = len(percentile)
+    boundaries = np.zeros((nhists, nper, 2), np.double)
 
   fs = 14  # Fontsize
 
@@ -65,9 +68,9 @@ def histogram(Z1, Z2=None, Z3=None, label=None, parname=None, thinning=1,
       # Plot HPD region:
       k = 1
       fc = ['0.65', '0.9']
-      for p in percentile:
+      for p in np.arange(nper):
       #if percentile is not None:
-        PDF, Xpdf, HPDmin = mu.credregion(post[j][i][:], p,
+        PDF, Xpdf, HPDmin = mu.credregion(post[j][i][:], percentile[p],
                                           pdf[npost*i+j], xpdf[npost*i+j])
         # interpolate xpdf into the histogram:
         f = si.interp1d(bins+0.5*(bins[1]-bins[0]), vals, kind='nearest')
@@ -77,9 +80,11 @@ def histogram(Z1, Z2=None, Z3=None, label=None, parname=None, thinning=1,
         PDF  = PDF [np.amin(xr):np.amax(xr)]
         # Boundaries of the HPD region:
         limXpdf = np.amin(Xpdf[PDF>HPDmin]), np.amax(Xpdf[PDF>HPDmin])
+        if j == 0: # Only for transit-pressure posterior
+          boundaries[i,p] = limXpdf
         ax.fill_between(Xpdf, 0, f(Xpdf),
           where=((Xpdf>limXpdf[0]) & (Xpdf<limXpdf[1])),
-          facecolor=fc[len(percentile)-k], edgecolor='none', interpolate=False)
+          facecolor=fc[nper-k], edgecolor='none', interpolate=False)
         k += 1
 
       ax.set_xlim(xran[j][0], xran[j][1])
@@ -98,3 +103,12 @@ def histogram(Z1, Z2=None, Z3=None, label=None, parname=None, thinning=1,
   if savefile is not None:
     plt.savefig(savefile)
 
+  with open("pt_boundaries.dat", "w") as f:
+    for p in np.arange(nper)[::-1]:
+      f.write("{:.1f}%          ".format(100.0*percentile[p]))
+    f.write("\n")
+    for i in np.arange(nhists):
+      for p in np.arange(nper)[::-1]:
+        f.write("{:5.2f} {:5.2f}    ".format(boundaries[i,p,0],
+                                             boundaries[i,p,1]))
+      f.write("\n")
