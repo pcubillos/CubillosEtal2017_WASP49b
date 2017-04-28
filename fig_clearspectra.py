@@ -64,5 +64,5 @@ plt.ylim(3, 3e-7)
 plt.legend(loc="upper right",  fontsize=15)
 plt.ylabel(r"$\rm Pressure\ \ (bar)$",  fontsize=16)
 plt.xlabel(r"$\rm Wavelength\ \ (um)$", fontsize=16)
-plt.savefig("../plots/wasp49b_clear_spectra.ps")
+plt.savefig("../plots/WASP49b_clear_spectra.ps")
 

@@ -42,9 +42,18 @@ $topdir/pyratbay/pbay.py -c mcmc_000.1xsolar.cfg
 $topdir/pyratbay/pbay.py -c mcmc_001.0xsolar.cfg
 $topdir/pyratbay/pbay.py -c mcmc_100.0xsolar.cfg
 
+# High-resolution atmospheric runs:
+cd $topdir/run03/
+$topdir/pyratbay/pbay.py -c upper_atm_000.1x.cfg
+$topdir/pyratbay/pbay.py -c upper_atm_001.0x.cfg
+$topdir/pyratbay/pbay.py -c upper_atm_100.0x.cfg
+
+
 # Figure 1:
 cd $topdir
 $topdir/fig_FORS2.py
+
+# Figure 2:
 
 # Figure 4:
 cd $topdir/run01/
@@ -54,4 +63,7 @@ $topdir/fig_clearspectra.py
 cd $topdir/run02/
 $topdir/fig_retrieval.py
 
+# Figure 7:
+cd $topdir
+$topdir/fig_eqclouds.py
 
