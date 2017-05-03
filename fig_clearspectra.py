@@ -4,15 +4,15 @@ import sys, os
 import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy.constants as sc
-import scipy.integrate as si
+import scipy.constants   as sc
+import scipy.integrate   as si
 import scipy.interpolate as sip
 from scipy.ndimage.filters import gaussian_filter1d as gaussf
 plt.ion()
 
 sys.path.append("../pyratbay")
 import pyratbay as pb
-pc = pb.constants
+import pyratbay.constants as pc
 
 
 # Plot clear spectra for each metallicity:
@@ -51,11 +51,11 @@ lw = 1.5
 plt.figure(-25)
 plt.clf()
 ax = plt.subplot(111)
-plt.semilogy(1e4/pyrat.spec.wn, pt3, lw=lw, color="orange"   ,
+plt.semilogy(1e4/pyrat.spec.wn, pt3, lw=lw, color="orange",
              label=r"$100\times\,{\rm solar}$")
 plt.semilogy(1e4/pyrat.spec.wn, pt2, lw=lw, color="sienna",
              label=r"$1.0\times\,{\rm solar}$")
-plt.semilogy(1e4/pyrat.spec.wn, pt1, lw=lw, color="k"        ,
+plt.semilogy(1e4/pyrat.spec.wn, pt1, lw=lw, color="k",
              label=r"$0.1\times\,{\rm solar}$")
 plt.axvspan(0.74, 1.01, color="0.9")
 

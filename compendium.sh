@@ -1,16 +1,10 @@
-# Clone code
+# Clone code:
 # From the directory where this file is located, execute:
 topdir=`pwd`
 git clone --recursive https://github.com/pcubillos/pyratbay
 cd $topdir/pyratbay
-git checkout 0b47988
+git checkout 5d9e2f4
 make
-
-
-# TEA patch: with a text editor open:
-$topdir/pyratbay/modules/TEA/tea/balance.py
-# And change line 147 to:
-            free_id.append(n + m)
 
 
 # Download HITRAN/HITEMP data:
@@ -54,6 +48,12 @@ cd $topdir
 $topdir/fig_FORS2.py
 
 # Figure 2:
+cd $topdir
+$topdir/fig_hydrodynamic.py
+
+# Figure 3:
+cd $topdir
+$topdir/fig_radiative-eq.py
 
 # Figure 4:
 cd $topdir/run01/
@@ -67,3 +67,6 @@ $topdir/fig_retrieval.py
 cd $topdir
 $topdir/fig_eqclouds.py
 
+# Figure 8:
+cd $topdir/run03/
+$topdir/fig_hires.py
