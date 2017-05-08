@@ -33,11 +33,12 @@ plt.clf()
 plt.subplots_adjust(0.15, 0.15, 0.95, 0.95)
 ax = plt.subplot(111)
 plt.errorbar(wavelength, rprs, error, fmt="o", lw=lw, color="k",
-             elinewidth=lw, capthick=lw)
+             elinewidth=lw, capthick=lw, label=r"$\rm Lendl\ et\ al.\ (2016)$")
 plt.xlim(0.72, 1.03)
 plt.ylim(0.11, 0.12)
 plt.ylabel(r"$R_{\rm p}/R_{\rm s}$",  fontsize=16)
 plt.xlabel(r"$\rm Wavelength\ \ (um)$", fontsize=16)
+plt.legend(loc="best", fontsize=14)
 plt.savefig("./plots/WASP49b_FORS2.ps")
 
 
