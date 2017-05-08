@@ -1,3 +1,12 @@
+# From this compendium:
+*.png
+*.tli
+*.par
+*.atm
+*.tea
+*.npz
+*/TEA.cfg
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

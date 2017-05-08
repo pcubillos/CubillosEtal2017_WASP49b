@@ -13,6 +13,23 @@ import pyratbay as pb
 import pyratbay.constants as pc
 
 
+# Load HARPS data from Wittenbach et al. (2017):
+with open("../inputs/WASP49b_HARPS_wyttenbach.rdb") as f:
+  lines = f.readlines()
+
+header = 2
+nwave = len(lines) - header
+
+wlength = np.zeros(nwave, np.double)
+rtilde  = np.zeros(nwave, np.double)
+uncert  = np.zeros(nwave, np.double)
+
+for i in np.arange(nwave):
+  wlength[i], rtilde[i], uncert[i] = lines[i+header].split()
+
+binsize = 15
+binr, binu, binwl = mu.binarray(rtilde, uncert, wlength, binsize)
+
 # ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # High resolution RT model:
 pyrat = pb.pyrat.init("spectra_hires.cfg")
@@ -32,7 +49,6 @@ dlambda = wl0/R  # lambda/R
 # Standard-deviation corresponding to instrumental resolution:
 sigma = (dlambda/deltawl)/2.355
 
-#mol, press, temp, abun1  = pb.atmosphere.readatm("WASP-49b_000.1xsolar.atm")
 mol, press, temp, q1 = pb.atmosphere.readatm("WASP-49b_000.1xsolar_hires.atm")
 mol, press, temp, q2 = pb.atmosphere.readatm("WASP-49b_001.0xsolar_hires.atm")
 mol, press, temp, q3 = pb.atmosphere.readatm("WASP-49b_100.0xsolar_hires.atm")
@@ -69,13 +85,16 @@ plt.plot(1e4*dwl, gaussf(M2, sigma), "-", lw=1.25, zorder=0,
          label=r"$1.0\times\,{\rm solar}$", color='sienna')
 plt.plot(1e4*dwl, gaussf(M1, sigma), "-", lw=1.25, zorder=0,
          label=r"$0.1\times\ {\rm solar}$", color='k')
+# The data:
+plt.errorbar(binwl, binr, binu, fmt="o", color="0.6", ms=4, zorder=1,
+             label=r"$\rm Wyttenbach\ et\ al.\ (2017)$")
 ax.set_xticks([5890, 5892, 5894, 5896, 5898, 5900])
 ax.set_xticklabels(['5890', '5892', '5894', '5896', '5898', '5900'])
-plt.xlim(5890, 5900)
+plt.xlim(5889, 5899)
 plt.ylim(0.972, 1.0095)
-plt.ylabel(r"$\tilde{\Re}$", fontsize=14)
+plt.ylabel(r"$\tilde{\mathfrak{R}}$", fontsize=14)
 plt.xlabel(r"$\rm Wavelength\ (um)$", fontsize=14)
-plt.legend(loc="lower right", fontsize=12)
+plt.legend(loc=(0.25, 0.04), fontsize=11)
 # Temperature profile:
 ax = plt.axes([0.815, 0.2, 0.15, 0.55])
 plt.semilogy(temp, pyrat.atm.press/pc.bar, "r-", lw=1.5)
