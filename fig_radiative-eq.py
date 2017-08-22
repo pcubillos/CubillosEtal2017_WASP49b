@@ -56,8 +56,8 @@ plt.semilogy(temp[4], press, lw=lw, color="limegreen",
              label=r"$\rm Cloud\ at\ 10^{-5}\ bar,\ weaker$")
 plt.semilogy(temp[3], press, lw=lw, color="limegreen", dashes=(7,3),
              label=r"$\rm Cloud\ at\ 10^{-5}\ bar,\ stronger$")
-plt.ylim(np.amax(press), np.amin(press))
-plt.ylim(1e2, 1e-8)
+plt.ylim(1e2, 2e-8)
+plt.xlim(750, 2010)
 plt.ylabel(r"${\rm Pressure\ \ (bar)}$",  fontsize=fs)
 plt.xlabel(r"${\rm Temperature\ \ (K)}$", fontsize=fs)
 plt.legend(loc="upper right")

@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 
+from scipy.ndimage import gaussian_filter1d as gaussf
+
 def getprofiles(file):
   """
   Read Helios temperature-pressure profiles.
@@ -20,7 +22,6 @@ def getprofiles(file):
       temp[i], press[i] = lines[i+nlines-nlayers].split()[1:]
 
   return temp, press
-
 
 # HELIOS TP files:
 helios = ["./inputs/helios/tp_w49b_100x_solar.dat",
@@ -49,22 +50,28 @@ press = np.zeros((nz, nlayers),        np.double)
 cond  = np.zeros((nz, ncond, nlayers), np.double)
 
 htemp = []
-
 for k in np.arange(nz):
   # Read HELIOS file:
   temp, hpress = getprofiles(helios[k])
   htemp.append(temp)
   hpress /= 1e6  # in bar
-
   # Read eq. cloud file:
   with open(eqclouds[k]) as f:
     lines = f.readlines()
-
   for i in np.arange(nlayers):
     info = lines[i+13].split()
     press[k,i]  = info[0]
     cond[k,:,i] = info[1:]
 
+# Connect to thermosphere:
+a, b = -1100.0, -17600
+thermo = a*np.log(hpress) + b  # Temperature slope as estimade from HD runs
+for k in np.arange(nz):
+  ithermo = thermo > htemp[k]
+  htemp[k][ithermo] = thermo[ithermo]
+  # Round the intersection:
+  iround = np.where(ithermo)[0][0] - 3
+  htemp[k][iround:] = gaussf(htemp[k][iround:], 2)
 
 # Read transit pressure HPD boundaries:
 with open("run02/pt_boundaries.dat", "r") as f:
@@ -77,14 +84,12 @@ for i in np.arange(nz):
   HPD[i,1] = hpd[2:4]
 HPD = 10**HPD
 
-
-# Plot curves:
-yran = 1e2, 1e-8
-xran = 0, 2250
+# Plot setup:
+yran = 1e2, 0.3e-8
+xran = 0, 2990
 hw = 100
-# Remove Y-minor ticks
 matplotlib.rcParams.update({'xtick.minor.size':0.0})
-
+matplotlib.rcParams.update({'xtick.labelsize':10})
 # colors
 c = np.array(['aqua',  'orange', 'brown',     'limegreen', 'k',
               'gold',  'peru',   'darkgreen', 'r',
@@ -100,8 +105,8 @@ d = [(), (), (), (), (),                # Solid
      (5,2), (5,2), (5,2), (5,2),        # Short dash
      (5,2,2,2), (5,2,2,2), (5,2,2,2), ] # long dash
 
-# Metallicity lebel:
-xtext, ytext = 2200, 3e-8
+# Metallicity label:
+xtext, ytext = 2500, 9e-9
 text = [r"$100\times\,{\rm solar}$",
         r"$1.0\times\,{\rm solar}$",
         r"$0.1\times\,{\rm solar}$"]
@@ -152,8 +157,7 @@ plt.xlabel(r"${\rm Temperature\ \ (K)}$")
 plt.text(xtext, ytext, text[k], fontsize=12, ha="right")
 plt.ylim(yran)
 plt.xlim(xran)
-plt.legend(loc="upper right", fontsize=7.5, bbox_to_anchor=(0.99, 0.9),
+plt.legend(loc="upper right", fontsize=7.5, bbox_to_anchor=(0.99, 0.57),
            bbox_transform=plt.gcf().transFigure)
 ax.set_yticklabels([])
 plt.savefig("./plots/equilibrium_clouds.ps")
-
