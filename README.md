@@ -1,12 +1,17 @@
-This is the Reproducible Research Compendium for:
+***
+### Note: This RR compendium makes use of the Pyrat-Bay package, which is currently proprietary software. The full functionality of this RRC will be available once the Pyrat-Bay package gets releases for public use (late 2017).  
+***
+***
 
-Cubillos et al. (2017): "Aerosol Constraints on the Atmosphere of the Hot Saturn-mass planet WASP-49b"
+# This is the Reproducible Research Compendium for:
 
-This paper was submitted to the American Astronomical Society Journals. To download the compendium to your local machine with the following command:
+## Cubillos et al. (2017): "Aerosol Constraints on the Atmosphere of the Hot Saturn-mass planet WASP-49b"
+
+This paper was submitted to the American Astronomical Society Journals. Download the compendium to your local machine with the following command:
 ```shell
 git clone https://github.com/pcubillos/CubillosEtal2017_WASP49b
 ```
-Then, follow the commands from the 'compendium.sh' file, a Shell script that contains all necessary instructions to reproduce the Pyrat-Bay data analysis and figures of this manuscript.
+Then, follow the commands from the '**compendium.sh**' file. This Shell script contains all necessary instructions to reproduce the Pyrat-Bay data analysis and figures of this manuscript.
 
 The Pyrat Bay code (Python Radiative-transfer in a Bayesian framework) is located at http://pcubillos.github.io/pyratbay/
 
