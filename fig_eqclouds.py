@@ -118,8 +118,8 @@ plt.subplots_adjust(left=0.1, right=0.99, bottom=0.1, top=0.96,
                     hspace=0.13, wspace=0.01)
 k=0
 ax=plt.subplot(1, 3, k+1)
-plt.axhspan(HPD[k][1][0], HPD[k][1][1], color="0.925", zorder=0)  # 95%
-plt.axhspan(HPD[k][0][0], HPD[k][0][1], color="0.8",   zorder=0)  # 68%
+plt.axhspan(HPD[k][1][0], HPD[k][1][1], color="0.87", zorder=0)  # 95%
+plt.axhspan(HPD[k][0][0], HPD[k][0][1], color="0.70",   zorder=0)  # 68%
 plt.fill_betweenx(hpress, htemp[k]-hw, htemp[k]+hw,
                   color="cornflowerblue", zorder=1)
 for i in np.arange(ncond):
@@ -132,8 +132,8 @@ plt.xlim(xran)
 
 k += 1
 ax=plt.subplot(1, 3, k+1)
-plt.axhspan(HPD[k][1][0], HPD[k][1][1], color="0.925", zorder=0)
-plt.axhspan(HPD[k][0][0], HPD[k][0][1], color="0.8",   zorder=0)
+plt.axhspan(HPD[k][1][0], HPD[k][1][1], color="0.87", zorder=0)
+plt.axhspan(HPD[k][0][0], HPD[k][0][1], color="0.70",   zorder=0)
 plt.fill_betweenx(hpress, htemp[k]-hw, htemp[k]+hw,
                   color="cornflowerblue", zorder=1)
 for i in np.arange(ncond):
@@ -146,8 +146,8 @@ ax.set_yticklabels([])
 
 k += 1
 ax=plt.subplot(1, 3, k+1)
-plt.axhspan(HPD[k][1][0], HPD[k][1][1], color="0.925", zorder=0)
-plt.axhspan(HPD[k][0][0], HPD[k][0][1], color="0.8",   zorder=0)
+plt.axhspan(HPD[k][1][0], HPD[k][1][1], color="0.87", zorder=0)
+plt.axhspan(HPD[k][0][0], HPD[k][0][1], color="0.70", zorder=0)
 plt.fill_betweenx(hpress, htemp[k]-hw, htemp[k]+hw,
                   color="cornflowerblue", zorder=1)
 for i in np.arange(ncond):

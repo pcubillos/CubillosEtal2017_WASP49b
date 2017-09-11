@@ -57,7 +57,7 @@ plt.semilogy(1e4/pyrat.spec.wn, pt2, lw=lw, color="sienna",
              label=r"$1.0\times\,{\rm solar}$")
 plt.semilogy(1e4/pyrat.spec.wn, pt1, lw=lw, color="k",
              label=r"$0.1\times\,{\rm solar}$")
-plt.axvspan(0.74, 1.01, color="0.9")
+plt.axvspan(0.74, 1.01, color="0.80")
 
 plt.xlim(0.5, 1.2)
 plt.ylim(3, 3e-7)
@@ -65,4 +65,3 @@ plt.legend(loc="upper right",  fontsize=15)
 plt.ylabel(r"$\rm Pressure\ \ (bar)$",  fontsize=16)
 plt.xlabel(r"$\rm Wavelength\ \ (um)$", fontsize=16)
 plt.savefig("../plots/WASP49b_clear_spectra.ps")
-
