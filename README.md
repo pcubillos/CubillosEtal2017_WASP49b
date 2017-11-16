@@ -6,9 +6,9 @@
 
 # This is the Reproducible Research Compendium for:
 
-## Cubillos et al. (2017): "Aerosol Constraints on the Atmosphere of the Hot Saturn-mass planet WASP-49b"
+## Cubillos et al. (2017), ApJ 849, 145: "Aerosol Constraints on the Atmosphere of the Hot Saturn-mass planet WASP-49b" [[Link](http://adsabs.harvard.edu/abs/2017ApJ...849..145C)]
 
-This paper is accepted for publication in ApJ. To download this compendium to your local machine, run the following command:
+To download this compendium to your local machine, run the following command:
 ```shell
 git clone https://github.com/pcubillos/CubillosEtal2017_WASP49b
 ```
